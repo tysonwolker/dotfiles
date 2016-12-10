@@ -1,6 +1,6 @@
 " vim: set foldmethod=marker foldlevel=0:
 " ============================================================================
-" .vimrc of Junegunn Choi {{{
+" .vimrc of Tyson Wolker {{{
 " ============================================================================
 
 let s:darwin = has('mac')
@@ -17,7 +17,6 @@ Plug 'junegunn/vim-easy-align',       { 'on': ['<Plug>(EasyAlign)', 'EasyAlign']
 Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity']      }
 Plug 'junegunn/vim-emoji'
 Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-fnr'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/vim-journal'
@@ -85,6 +84,9 @@ if v:version >= 703
 endif
 
 " Lang
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim',    { 'do': ':UpdateRemotePlugins' }
+endif
 if v:version >= 703
   Plug 'vim-ruby/vim-ruby'
   Plug 'kovisoft/paredit',    { 'for': 'clojure' }
@@ -110,7 +112,9 @@ Plug 'dag/vim-fish'
 Plug 'chrisbra/unicode.vim', { 'for': 'journal' }
 
 " Lint
-Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
+if has('nvim')
+    Plug 'neomake/neomake'
+endif
 
 call plug#end()
 endif
@@ -329,9 +333,9 @@ endif
 
 if has('gui_running')
   set guifont=Menlo:h14 columns=80 lines=40
-  silent! colo seoul256-light
+  silent! colo molokai 
 else
-  silent! colo seoul256
+  silent! colo molokai 
 endif
 
 " }}}
@@ -1487,49 +1491,6 @@ let g:signify_vcs_list = ['git']
 let g:signify_skip_filetype = { 'journal': 1 }
 
 " ----------------------------------------------------------------------------
-" vim-slash
-" ----------------------------------------------------------------------------
-function! s:blink(times, delay)
-  let s:blink = { 'ticks': 2 * a:times, 'delay': a:delay }
-
-  function! s:blink.tick(_)
-    let self.ticks -= 1
-    let active = self == s:blink && self.ticks > 0
-
-    if !self.clear() && active && &hlsearch
-      let [line, col] = [line('.'), col('.')]
-      let w:blink_id = matchadd('IncSearch',
-            \ printf('\%%%dl\%%>%dc\%%<%dc', line, max([0, col-2]), col+2))
-    endif
-    if active
-      call timer_start(self.delay, self.tick)
-    endif
-  endfunction
-
-  function! s:blink.clear()
-    if exists('w:blink_id')
-      call matchdelete(w:blink_id)
-      unlet w:blink_id
-      return 1
-    endif
-  endfunction
-
-  call s:blink.clear()
-  call s:blink.tick(0)
-  return ''
-endfunction
-
-if has('timers')
-  if has_key(g:plugs, 'vim-slash')
-    noremap <expr> <plug>(slash-after) <sid>blink(2, 50)
-  else
-    noremap <expr> n 'n'.<sid>blink(2, 50)
-    noremap <expr> N 'N'.<sid>blink(2, 50)
-    cnoremap <expr> <cr> (stridx('/?', getcmdtype()) < 0 ? '' : <sid>blink(2, 50))."\<cr>"
-  endif
-endif
-
-" ----------------------------------------------------------------------------
 " vim-emoji :dog: :cat: :rabbit:!
 " ----------------------------------------------------------------------------
 function! s:replace_emojis() range
@@ -1626,11 +1587,16 @@ let g:paredit_smartjump = 1
 " let g:markdown_fenced_languages = ['sh', 'ruby', 'clojure', 'vim', 'java', 'gnuplot']
 
 " ----------------------------------------------------------------------------
-" syntastic
+" neomake 
 " ----------------------------------------------------------------------------
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+if has('nvim')
+  let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+  let b:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+  autocmd! BufWritePost * Neomake
+  let g:neomake_javascript_enabled_makers = ['eslint']
+
+  let g:neomake_sass_enabled_makers = ['sass-lint']
+endif
 
 " ----------------------------------------------------------------------------
 " splitjoin
