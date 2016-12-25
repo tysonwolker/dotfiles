@@ -1,0 +1,30 @@
+###############################################################################
+# Disable caps lock                                                           #
+###############################################################################
+# Delete old entries first
+# Normally these do not have an entry for com.apple.keyboard.modifiermapping.*
+# Sometimes there is more than one (maybe caused by upgrade?)
+old_ifs="$IFS"
+export IFS=$'\n'
+for plist in ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist; do
+    keys=$(/usr/libexec/PlistBuddy -c 'Print' "$plist" | egrep 'com\.apple\.keyboard\.modifiermapping.[0-9]' | awk '{ print $1 }')
+    for key in "$keys"; do
+        /usr/libexec/PlistBuddy -c "Delete ${key}" "$plist" >/dev/null 2>&1
+    done
+done
+export IFS="$old_ifs"
+
+# Keyboards, VID-PID; get from ioreg -n IOHIDKeyboard -r (USB only?)
+das="1241-8211"
+mbp2012="1452-610"
+
+for pair in $das $mbp2012; do
+    for plist in ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist; do
+        # If first one fails, then the entry is assumed to exist
+        /usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.${pair}-0 array" "$plist" >/dev/null 2>&1 || continue
+        /usr/libexec/PlistBuddy -c "Add :com.apple.keyboard.modifiermapping.${pair}-0: dict" "$plist"
+        /usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.${pair}-0:0:HIDKeyboardModifierMappingDst integer -1" "$plist"
+        /usr/libexec/PlistBuddy -c "Add com.apple.keyboard.modifiermapping.${pair}-0:0:HIDKeyboardModifierMappingSrc integer 0" "$plist"
+    done
+done
+unset das mbp2012
