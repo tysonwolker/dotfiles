@@ -12,6 +12,7 @@ brew 'jq'
 brew 'libcaca', args: ['with-imlib2']
 brew 'libgit2'
 brew 'openssl'
+brew 'mas'
 brew 'node'
 brew 'readline'
 brew 'postgresql'
@@ -69,7 +70,7 @@ cask 'beardedspice'
 cask 'vlc'
 cask 'deluge'
 cask 'music-manager'
-cas 'subtitles'
+cask 'subtitles'
 cask 'plex-media-server'
 cask 'google-plus-auto-backup'
 cask'jadengeller-helium'
@@ -89,3 +90,19 @@ cask 'marked'
 cask 'go2shell'
 cask 'gitup'
 
+# Mas
+mas 'Xcode', id: 497799835
+mas 'Fantastical 2', id: 975937182
+mas 'Airmail 3', id: 918858936
+mas 'Reeder 3', id: 880001334
+mas 'Paste – smart clipboard history & snippets manager', id: 967805235
+mas 'Noizio', id: 928871589
+mas 'HazeOver • Distraction Dimmer', id: 430798174
+mas 'SnippetsLab', id: 1006087419
+mas 'Battery Monitor - Health, Status and Battery Usage Information', id: 836505650
+mas 'Deliveries: a package tracker', id: 924726344
+mas 'Be Focused Pro - Focus Timer & Goal Tracker', id: 961632517
+mas 'Patterns - The Regex App', id: 429449079
+mas 'DaisyDisk', id: 411643860
+mas 'Moom', id: 419330170
+mas 'ForkLift - File Manager and FTP/SFTP/WebDAV/Amazon S3 client', id: 412448059
