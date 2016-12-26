@@ -41,4 +41,7 @@ unset config_files
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+zplug check || zplug install
+zplug load
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

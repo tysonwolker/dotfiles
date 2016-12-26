@@ -4,6 +4,7 @@ tap 'homebrew/bundle'
 
 brew 'ack'
 brew 'coreutils'
+brew 'doxygen'
 brew 'go'
 brew 'grc'
 brew 'imagemagick'
@@ -13,10 +14,8 @@ brew 'libcaca', args: ['with-imlib2']
 brew 'libgit2'
 brew 'openssl'
 brew 'mas'
-brew 'node'
 brew 'readline'
 brew 'postgresql'
-brew 'puma/puma/puma-dev'
 brew 'ruby-build'
 brew 'rbenv'
 brew 'roundup'
@@ -26,6 +25,8 @@ brew 'unrar'
 brew 'wget'
 brew 'yarn'
 brew 'youtube-dl'
+brew 'zplug'
+
 
 # Core applications
 cask 'hyperdock'
