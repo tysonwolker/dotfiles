@@ -3,9 +3,13 @@ engine = google_drive
 
 [applications_to_sync]
 airmail
+appcleaner
 charles
 dash
+fantastical
 flux
+forklift-2
+go2shell
 hazel
 hyperdock
 kaleidoscope
