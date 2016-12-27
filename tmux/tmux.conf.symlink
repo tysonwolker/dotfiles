@@ -1,120 +1,154 @@
-set -g default-command "login-shell"
+# Hierarchy:
+#  Server
+#  ㄴSession
+#    ㄴWindow
+#      ㄴPane
 
-# tmux display things in 256 colors
-set -g default-terminal "tmux-256color-italic"
+# Options:
+# - Session options (set-option [-g])
+# - Window options (set-window-option [-g])
 
-#  enable terminal compability
-set-option -ga terminal-overrides ",tmux-256color-italic:Tc"
+# -------------------------------------------------------------------
+# Session options
+# -------------------------------------------------------------------
+# Change bind key to ctrl-a
+unbind-key c-b
+set-option -g prefix c-a
 
-set -g history-limit 20000
+# Index starts from 1
+set-option -g base-index 1
 
-# automatically renumber tmux windows
-set -g renumber-windows on
+# Renumber windows when a window is closed
+set-option -g renumber-windows on
 
-# unbind default prefix and set it to Ctrl+a
-unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
+# History
+set-option -g history-limit 102400
 
-# for nested tmux sessions
+# Repeat time limit (ms)
+set-option -g repeat-time 500
+
+# 256-color terminal
+set-option -g default-terminal "screen-256color"
+
+# Add truecolor support (tmux info | grep Tc)
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# Key binding in the status line (bind-key :)
+set-option -g status-keys emacs
+
+# Mouse
+set-option -g mouse on
+
+# -------------------------------------------------------------------
+# Window options
+# -------------------------------------------------------------------
+# Copy-mode
+set-window-option -g mode-keys vi
+
+# -------------------------------------------------------------------
+# Key bindings
+# -------------------------------------------------------------------
+# prefix c
+bind-key c new-window -c "#{pane_current_path}"
+
+# prefix ctrl-a
+bind-key c-a last-window
+
+# prefix a
 bind-key a send-prefix
 
-# Activity Monitoring
-setw -g monitor-activity off
-set -g visual-activity off
+# prefix |
+bind-key | split-window -h -c "#{pane_current_path}"
 
-# Rather than constraining window size to the maximum size of any client
-# connected to the *session*, constrain window size to the maximum size of any
-# client connected to *that window*. Much more reasonable.
-setw -g aggressive-resize on
+# prefix -
+bind-key - split-window -c "#{pane_current_path}"
 
-# make delay shorter
-set -sg escape-time 0
+# Moving windows
+bind-key -r > swap-window -t :+
+bind-key -r < swap-window -t :-
 
-# tile all windows
-unbind =
-bind = select-layout tiled
+# Back and forth
+bind-key bspace previous-window
+bind-key space next-window
+bind-key / next-layout # Overridden
 
-# cycle through panes
-# unbind C-a
-# unbind o # this is the default key for cycling panes
-# bind ^A select-pane -t:.+
+# Pane-movement
+bind-key h select-pane -L
+bind-key l select-pane -R
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key tab select-pane -t :.+
+bind-key btab select-pane -t :.-
 
-# make window/pane index start with 1
-set -g base-index 1
-setw -g pane-base-index 1
+# Synchronize panes
+bind-key * set-window-option synchronize-pane
 
-set-option -g set-titles on
-set-option -g set-titles-string "#T - #W"
-# set-window-option -g automatic-rename on
+# Reload ~/.tmux.conf
+bind-key R source-file ~/.tmux.conf \; display-message "Reloaded!"
 
-######################
-#### Key Bindings ####
-######################
+# copy-mode
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-pipe "pbcopy"
 
-# reload config file
-bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
+# Capture pane and open in Vim
+bind-key C-c run 'tmux capture-pane -S -102400 -p > /tmp/tmux-capture.txt'\;\
+             new-window "view /tmp/tmux-capture.txt"
+bind-key M-c run "screencapture -l$(osascript -e 'tell app \"iTerm\" to id of window 1') -x -o -P /tmp/$(date +%Y%m%d-%H%M%S).png"
 
-# quickly open a new window
-bind N new-window
+# Clear scrollback buffer
+bind-key C-l send-keys C-l \; clear-history
 
-# split window and fix path for tmux 1.9
-bind | split-window -h -c "#{pane_current_path}"
-bind - split-window -v -c "#{pane_current_path}"
+# Notes
+bind-key C-n if-shell "tmux select-window -t NOTES" "" \
+  "new-window -n NOTES 'bash -i ~/gdrive/sync/notes/list'"
 
-# synchronize all panes in a window
-bind y setw synchronize-panes
+# Goyo
+bind-key G set status
 
-# pane movement shortcuts
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
+# -------------------------------------------------------------------
+# Decoration (256-color)
+# -------------------------------------------------------------------
+set-option -g status-justify left
+set-option -g status-left '#[bg=colour72] #[bg=colour237] #[bg=colour236] #[bg=colour235]#[fg=colour185] #h #[bg=colour236] '
+set-option -g status-left-length 16
+set-option -g status-bg colour237
+set-option -g status-right '#[bg=colour236] #[bg=colour235]#[fg=colour185] #(date "+%a %b %d %H:%M") #[bg=colour236] #[bg=colour237] #[bg=colour72] '
+set-option -g status-interval 60
 
-bind -r C-h select-window -t :-
-bind -r C-l select-window -t :+
+set-option -g pane-active-border-fg colour240
+set-option -g pane-border-fg colour238
 
-# Resize pane shortcuts
-bind -r H resize-pane -L 10
-bind -r J resize-pane -D 10
-bind -r K resize-pane -U 10
-bind -r L resize-pane -R 10
+set-window-option -g window-status-format '#[bg=colour238]#[fg=colour107] #I #[bg=colour239]#[fg=colour110] #[bg=colour240]#W#[bg=colour239]#[fg=colour195]#F#[bg=colour238] '
+set-window-option -g window-status-current-format '#[bg=colour236]#[fg=colour215] #I #[bg=colour235]#[fg=colour167] #[bg=colour234]#W#[bg=colour235]#[fg=colour195]#F#[bg=colour236] '
 
-# enable mouse support for switching panes/windows
-setw -g mouse on
-# set-option -g -q mouse on
+# set-window-option -g window-style 'bg=colour238'
+# set-window-option -g window-active-style 'bg=colour237'
 
-bind-key -T root PPage if-shell -F "#{alternate_on}" "send-keys PPage" "copy-mode -e; send-keys PPage"
-bind-key -t vi-copy PPage page-up
-bind-key -t vi-copy NPage page-down
+# -------------------------------------------------------------------
+# fzf integration
+# -------------------------------------------------------------------
+# Tmux completion
+bind-key -n 'M-t' run "tmux split-window -p 40 'tmux send-keys -t #{pane_id} \"$(tmuxwords.rb --all --scroll 1000 --min 5 | fzf --multi | paste -sd\\  -)\"'"
 
-bind -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "select-pane -t =; send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
-bind -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "select-pane -t =; send-keys -M" "select-pane -t =; send-keys -M"
-bind-key -t vi-copy WheelUpPane halfpage-up
-bind-key -t vi-copy WheelDownPane halfpage-down
+# fzf-locate (all)
+bind-key -n 'M-`' run "tmux split-window -p 40 'tmux send-keys -t #{pane_id} \"$(locate / | fzf -m | paste -sd\\  -)\"'"
 
-# maximizing and restoring windows
-unbind Up
-bind Up new-window -d -n fullscreen \; swap-pane -s fullscreen.1 \; select-window -t fullscreen
-unbind Down
-bind Down last-window \; swap-pane -s fullscreen.1 \; kill-window -t fullscreen
+# select-pane (@george-b)
+bind-key 0 run "tmux split-window -l 12 'bash -ci ftpane'"
 
-# set vi mode for copy mode
-setw -g mode-keys vi
-# more settings to make copy-mode more vim-like
-unbind [
-bind Escape copy-mode
-unbind p
-bind p paste-buffer
-bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-selection
+# -------------------------------------------------------------------
+# Here be dragons!
+# -------------------------------------------------------------------
+# Backslash bind-key
+if-shell "test $USER = jg" \
+  "unbind C-a; set-option -g prefix \\ ; bind-key ] send-prefix; bind-key p paste-buffer; bind-key \\ last-window"
 
-# Buffers to/from Mac clipboard, yay tmux book from pragprog
-bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-buffer"
-
-##############################
-### Color & Style Settings ###
-##############################
-
-source ~/.dotfiles/tmux/theme.sh
+# Bind-key switch
+bind-key F9  set-option -g prefix C-a   \;\
+             bind-key a send-prefix     \;\
+             bind-key p previous-window \;\
+             bind-key C-a last-window
+bind-key F10 set-option -g prefix "\\"  \;\
+             bind-key ] send-prefix     \;\
+             bind-key p paste-buffer    \;\
+             bind-key "\\" last-window
