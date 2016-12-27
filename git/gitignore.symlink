@@ -170,3 +170,6 @@ _testmain.go
 # External packages folder
 vendor/
 Contact GitHub 
+
+#.nvmrc
+.nvmrc
