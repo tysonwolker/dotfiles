@@ -1,13 +1,16 @@
-# nvm 
-if test ! $(which nvm)
+# n version manager 
+if test ! $(which n)
 then
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+  curl -L https://git.io/n-install | bash -s -- -q -n
+  n stable 
 fi
 
 if test ! $(which spoof)
 then
-  sudo npm install spoof -g
+  npm install -g spoof
 fi
 
-
-npm install -g avn avn-nvm avn-n
+if test ! $(which avn)
+then
+  npm install -g avn avn-n
+fi

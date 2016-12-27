@@ -45,47 +45,4 @@ zplug check || zplug install
 zplug load
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-nvm_echo() {
-  command printf %s\\n "$*" 2>/dev/null || {
-    nvm_echo() {
-      # shellcheck disable=SC1001
-      \printf %s\\n "$*" # on zsh, `command printf` sometimes fails
-    }
-    nvm_echo "$@"
-  }
-}
-
-nvm_find_up() {
-  local path
-  path="${PWD}"
-  while [ "${path}" != "" ] && [ ! -f "${path}/${1-}" ]; do
-    path=${path%/*}
-  done
-  nvm_echo "${path}"
-}
-
-nvm_find_nvmrc() {
-  local dir
-  dir="$(nvm_find_up '.nvmrc')"
-  if [ -e "${dir}/.nvmrc" ]; then
-    echo "${dir}/.nvmrc"
-  fi
-}
-
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local nvmrc_path="$(nvm_find_nvmrc)"
-  if [ -n "$nvmrc_path" ]; then
-    local node_version="$(nvm version)"
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-    
-    if [ "$nvmrc_node_version" != "N/A" ] && [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm install
-    else
-      nvm use $node_version
-    fi
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
