@@ -50,7 +50,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'rhysd/vim-grammarous'
 Plug 'junegunn/vim-online-thesaurus'
-
+Plug 'editorconfig/editorconfig-vim'
 " Plug 'SirVer/ultisnips', { 'on': '#InsertEnter' }
 " Plug 'honza/vim-snippets'
 
