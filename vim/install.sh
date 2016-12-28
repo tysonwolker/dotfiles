@@ -32,3 +32,4 @@ then
 else
   ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 fi
+nvim +PluginInstall +qall
