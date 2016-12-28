@@ -13,4 +13,5 @@ fi
 if test ! $(which avn)
 then
   npm install -g avn avn-n
+  avn setup
 fi
