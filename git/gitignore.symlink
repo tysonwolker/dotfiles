@@ -92,6 +92,9 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
+# Node versions
+.nvmrc
+.node-version
 
 ############## JET BRAINS ###############
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
@@ -170,6 +173,3 @@ _testmain.go
 # External packages folder
 vendor/
 Contact GitHub 
-
-#.nvmrc
-.nvmrc
