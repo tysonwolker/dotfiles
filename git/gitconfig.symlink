@@ -43,3 +43,5 @@
         default = simple
 [include]
         path = .dotfiles/git/gitaliases
+[rerere]
+	enabled = true
