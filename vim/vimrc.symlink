@@ -133,7 +133,7 @@ augroup END
 
 set nu
 set autoindent
-set smartindent
+filetype plugin indent on " Dont use smart indent anymore
 set lazyredraw
 set laststatus=2
 set showcmd
