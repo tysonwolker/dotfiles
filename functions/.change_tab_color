@@ -1,0 +1,7 @@
+local red=$(python -c "import random; import os; random.seed('red' + os.getcwd()); print random.randint(0,255)")
+local green=$(python -c "import random; import os; random.seed('green' + os.getcwd()); print random.randint(0,255)")
+local blue=$(python -c "import random; import os; random.seed('blue' + os.getcwd()); print random.randint(0,255)")
+
+echo -e "\033]6;1;bg;red;brightness;" + $red + "\a"
+echo -e "\033]6;1;bg;green;brightness;" + $green + "\a"
+echo -e "\033]6;1;bg;blue;brightness;" + $blue + "\a"
