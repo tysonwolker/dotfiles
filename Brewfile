@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'neovim/neovim'
 
 brew 'ack'
 brew 'coreutils'
@@ -14,6 +15,7 @@ brew 'libgit2'
 brew 'openssl'
 brew 'mas'
 brew 'mackup'
+brew 'neovim/neovim/neovim'
 brew 'readline'
 brew 'postgresql'
 brew 'ruby-build'
