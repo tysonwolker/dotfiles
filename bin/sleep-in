@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Schedule sleep in X minutes, use like: sleep-in 60
+minutes=$1
+datetime=`date -v+${minutes}M +"%m/%d/%y %H:%M:%S"`
+sudo pmset schedule sleep "$datetime"
+echo "Scheduled sleep @ $datetime"
