@@ -1,9 +1,3 @@
-if test ! $(which n)
-then
-  curl -L https://git.io/n-install | bash -s -- -q -n
-  n stable 
-fi
-
 if test ! $(which spoof)
 then
   npm install -g spoof
