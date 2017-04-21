@@ -142,6 +142,8 @@ install_vim () {
 
   local overwrite_all=false backup_all=false skip_all=false
 
+  mkdir -p "$HOME/.config/nvim"
+
   link_file "$DOTFILES_ROOT/nvim" "$HOME/.config/nvim"
 }
 
