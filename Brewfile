@@ -49,6 +49,7 @@ cask 'appcleaner'
 cask 'contexts'
 cask 'hazel'
 cask 'nordvpn'
+cask 'pdfpen'
 
 # Design tools
 cask 'sketch'
