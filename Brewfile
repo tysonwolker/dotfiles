@@ -49,7 +49,6 @@ cask 'appcleaner'
 cask 'contexts'
 cask 'hazel'
 cask 'nordvpn'
-cask 'pdfpen'
 
 # Design tools
 cask 'sketch'
@@ -111,3 +110,4 @@ mas 'Patterns - The Regex App', id: 429449079
 mas 'DaisyDisk', id: 411643860
 mas 'Moom', id: 419330170
 mas 'ForkLift - File Manager and FTP/SFTP/WebDAV/Amazon S3 client', id: 412448059
+mas 'Pixelmator', id: 407963104
