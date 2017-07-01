@@ -110,4 +110,6 @@ mas 'Patterns - The Regex App', id: 429449079
 mas 'DaisyDisk', id: 411643860
 mas 'Moom', id: 419330170
 mas 'ForkLift - File Manager and FTP/SFTP/WebDAV/Amazon S3 client', id: 412448059
-mas 'Pixelmator', id: 407963104
+mas 'Pixelmator', id: e07963104
+mas 'Todoist: To Do List | Task List', id: 585829637
+mas 'Amphetamine', id: 937984704
