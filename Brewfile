@@ -16,9 +16,8 @@ brew 'libgit2'
 brew 'openssl'
 brew 'mackup'
 brew 'mas'
-brew 'maven'
 brew 'n'
-brew 'neovim/neovim/neovim'
+brew 'neovim'
 brew 'readline'
 brew 'postgresql'
 brew 'ruby-build'
@@ -31,6 +30,9 @@ brew 'wget'
 brew 'youtube-dl'
 brew 'zplug'
 
+# Java
+cask 'java'
+brew 'maven'
 
 # Core applications
 cask 'hyperdock'

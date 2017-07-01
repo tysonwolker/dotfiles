@@ -1,3 +1,5 @@
+n stable
+n use stable
 if test ! $(which spoof)
 then
   npm install -g spoof
@@ -18,3 +20,9 @@ if test ! $(which eslint)
 then
   npm install -g eslint
 fi
+
+if test ! $(which diff-so-fancy)
+then
+  npm install -g diff-so-fancy
+fi
+

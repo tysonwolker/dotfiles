@@ -1,6 +1,9 @@
 # Local/private config goes in the include
 [include]
         path = ~/.gitconfig.local
+[pager]
+        diff = diff-so-fancy | less --tabs=4 -RFX
+	    show = diff-so-fancy | less --tabs=4 -RFXnpm install -g diff-so-fancy
 [hub]
         protocol = https
 [alias]
@@ -10,12 +13,30 @@
         rank-contributors = !$ZSH/bin/git-rank-contributors
         count   = !git shortlog -sn
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
+	ui = always
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
 [core]
         excludesfile = ~/.gitignore
+        attributesfile = ~/.gitattributes
         editor = nvim
 [apply]
         whitespace = nowarn
@@ -24,6 +45,7 @@
         trustexitcode = true
 [merge]
         tool = Kaleidoscope
+        renameLimit = 0
 [difftool "Kaleidoscope"]
         cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
@@ -33,15 +55,18 @@
         keepBackup = false
 [diff]
         tool = Kaleidoscope
+	    compactionHeuristic = true
 [help]
         autocorrect = 1
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
-        default = simple
+        default = current
+        followTags = true
+[rebase]
+        autosquash = true
+[rerere]
+	    enabled = true
+[stash]
+	showPatch = true
 [include]
         path = .dotfiles/git/gitaliases
-[rerere]
-	enabled = true
+
