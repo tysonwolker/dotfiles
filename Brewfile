@@ -1,7 +1,6 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
-tap 'neovim/neovim'
 tap 'fonts'
 
 brew 'ack'
@@ -33,6 +32,10 @@ brew 'zplug'
 # Java
 cask 'java'
 brew 'maven'
+
+# Python
+brew 'python'
+brew 'python3'
 
 # Fonts
 cask 'font-hack'
