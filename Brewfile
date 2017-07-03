@@ -19,8 +19,6 @@ brew 'n'
 brew 'neovim'
 brew 'readline'
 brew 'postgresql'
-brew 'ruby-build'
-brew 'rbenv'
 brew 'roundup'
 brew 'spaceman-diff'
 brew 'tmux'
@@ -36,6 +34,10 @@ brew 'maven'
 # Python
 brew 'python'
 brew 'python3'
+
+# Ruby
+brew 'rbenv'
+brew 'ruby-build'
 
 # Fonts
 cask 'font-hack'

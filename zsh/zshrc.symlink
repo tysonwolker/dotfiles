@@ -21,11 +21,15 @@ do
   source $file
 done
 
+# load brews etc here
+source "$ZSH/system/_path.zsh"
+
 # load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+for file in ${${${config_files:#*/path.zsh}:#*/completion.zsh}:#system/_path.zsh}
 do
   source $file
 done
+
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
