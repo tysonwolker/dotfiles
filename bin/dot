@@ -4,10 +4,23 @@
 #
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
+verbose='false'
+skipMacOSDefaults='false'
+
+while getopts ':ov' flag; do
+  case "${flag}" in
+    o) skipMacOSDefaults='true' ;;
+    v) verbose='true' ;;
+    *) error "Unexpected option ${flag}" ;;
+  esac
+done
+
 export ZSH=$HOME/.dotfiles
 
-# Set macOS defaults
-$ZSH/macos/set-defaults.sh
+if [ "$skipMacOSDefaults" = true ] ; then
+    # Set macOS defaults
+    $ZSH/macos/set-defaults.sh
+fi
 
 # Install homebrew
 echo "install homebrew"
