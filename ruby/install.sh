@@ -9,5 +9,3 @@ ln -sf ./rbenv-default-gems $(rbenv root)/plugins/default-gems
 
 rbenv install 2.4.1 -s
 rbenv global 2.4.1
-
-gem install tmuxinator
