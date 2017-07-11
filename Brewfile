@@ -58,6 +58,7 @@ cask 'appcleaner'
 cask 'contexts'
 cask 'hazel'
 cask 'nordvpn'
+cask 'bee'
 
 # Design tools
 cask 'sketch'
