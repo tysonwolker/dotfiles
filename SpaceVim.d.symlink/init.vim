@@ -55,18 +55,11 @@ let g:spacevim_guifont = 'DejaVu\ Sans\ Mono\ for\ Powerline\ 11'
 
 set clipboard=unnamed
 
-
-
 let g:spacevim_plugin_bundle_dir = '~/.cache/vimfiles/'
-nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
-xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
 
 let g:spacevim_custom_plugins = [
     \ ['junegunn/fzf'],
     \ ['junegunn/fzf.vim'],
     \ ['editorconfig/editorconfig-vim'],
     \ ]
-
 call SpaceVim#layers#load('lang#javascript')
