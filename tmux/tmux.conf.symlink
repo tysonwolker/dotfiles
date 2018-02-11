@@ -86,10 +86,6 @@ bind-key * set-window-option synchronize-pane
 # Reload ~/.tmux.conf
 bind-key R source-file ~/.tmux.conf \; display-message "Reloaded!"
 
-# copy-mode
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-pipe "pbcopy"
-
 # Capture pane and open in Vim
 bind-key C-c run 'tmux capture-pane -S -102400 -p > /tmp/tmux-capture.txt'\;\
              new-window "view /tmp/tmux-capture.txt"
@@ -121,8 +117,16 @@ set-option -g pane-border-fg colour238
 set-window-option -g window-status-format '#[bg=colour238]#[fg=colour107] #I #[bg=colour239]#[fg=colour110] #[bg=colour240]#W#[bg=colour239]#[fg=colour195]#F#[bg=colour238] '
 set-window-option -g window-status-current-format '#[bg=colour236]#[fg=colour215] #I #[bg=colour235]#[fg=colour167] #[bg=colour234]#W#[bg=colour235]#[fg=colour195]#F#[bg=colour236] '
 
+
 # set-window-option -g window-style 'bg=colour238'
 # set-window-option -g window-active-style 'bg=colour237'
+
+# -------------------------------------------------------------------
+# Clipboard
+# -------------------------------------------------------------------
+
+# Copy-paste integration
+
 
 # -------------------------------------------------------------------
 # fzf integration
@@ -152,3 +156,15 @@ bind-key F10 set-option -g prefix "\\"  \;\
              bind-key ] send-prefix     \;\
              bind-key p paste-buffer    \;\
              bind-key "\\" last-window
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+set -g @resurrect-strategy-nvim 'session'
+
+run '~/.tmux/plugins/tpm/tpm'
+
+set-window-option -g pane-base-index 1
+
