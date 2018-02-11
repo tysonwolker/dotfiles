@@ -97,6 +97,11 @@ set_prompt () {
 }
 
 precmd() {
-  title "zsh" "%m" "%55<...<%~"
+  if GPATH=`git rev-parse --show-toplevel --quiet 2>/dev/null`; then
+    echo -ne "\e]1;${GPATH##*/}\a"
+  else
+    title "zsh" "%m" "%55<...<%~"
+  fi
+
   set_prompt
 }
