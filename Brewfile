@@ -1,7 +1,8 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
-tap 'fonts'
+tap 'caskroom/fonts'
+tap 'dteoh/sqa' # Slow quit apps tap
 
 brew 'ack'
 brew 'coreutils'
@@ -18,17 +19,21 @@ brew 'mas'
 brew 'n'
 brew 'neovim'
 brew 'readline'
+brew 'ripgrep'
 brew 'postgresql'
 brew 'roundup'
 brew 'spaceman-diff'
-brew 'tmux'
 brew 'unrar'
 brew 'wget'
 brew 'youtube-dl'
 brew 'zplug'
 
+# Tmux
+brew 'tmux'
+brew 'reattach-to-user-namespace'
+
 # Java
-cask 'java'
+cask 'java8'
 brew 'maven'
 
 # Python
@@ -59,6 +64,9 @@ cask 'contexts'
 cask 'hazel'
 cask 'nordvpn'
 cask 'bee'
+cask 'gifcapture'
+cask 'grammarly'
+cask 'slowquitapps'
 
 # Design tools
 cask 'sketch'
