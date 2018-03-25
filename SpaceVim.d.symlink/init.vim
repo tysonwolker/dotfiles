@@ -62,4 +62,8 @@ let g:spacevim_custom_plugins = [
     \ ['junegunn/fzf.vim'],
     \ ['editorconfig/editorconfig-vim'],
     \ ]
-call SpaceVim#layers#load('lang#javascript')
+call SpaceVim#layers#load('lang#javascript',
+            \ {
+            \ 'auto_fix' : 1,
+            \ }
+            \ )

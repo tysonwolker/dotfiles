@@ -32,13 +32,22 @@ brew 'zplug'
 brew 'tmux'
 brew 'reattach-to-user-namespace'
 
+# Docker
+brew 'docker'
+brew 'docker-compose'
+brew 'docker-machine'
+brew 'xhyve'
+brew 'docker-machine-driver-xhyve'
+
+
 # Java
 cask 'java8'
 brew 'maven'
 
 # Python
-brew 'python'
-brew 'python3'
+brew 'python@2'
+brew 'python@3'
+cask 'anaconda'
 
 # Ruby
 brew 'rbenv'

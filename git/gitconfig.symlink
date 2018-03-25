@@ -13,19 +13,19 @@
         rank-contributors = !$ZSH/bin/git-rank-contributors
         count   = !git shortlog -sn
 [color]
-	ui = always
+	ui = true
 [color "diff"]
-	meta = yellow bold
-	commit = green bold
+	meta = yellow
+	commit = yellow bold
 	frag = magenta bold
 	old = red bold
 	new = green bold
 	whitespace = red reverse
 [color "diff-highlight"]
 	oldNormal = red bold
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -38,6 +38,7 @@
         excludesfile = ~/.gitignore
         attributesfile = ~/.gitattributes
         editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [apply]
         whitespace = nowarn
 [mergetool "Kaleidoscope"]
