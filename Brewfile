@@ -1,7 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
-tap 'caskroom/fonts'
+tap 'homebrew/cask-fonts'
 tap 'dteoh/sqa' # Slow quit apps tap
 
 brew 'ack'
@@ -54,7 +54,7 @@ brew 'rbenv'
 brew 'ruby-build'
 
 # Fonts
-cask 'font-hack'
+cask 'font-hack-nerd-font'
 
 # Core applications
 cask 'hyperdock'
