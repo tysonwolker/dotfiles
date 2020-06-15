@@ -7,6 +7,7 @@ tap 'dteoh/sqa' # Slow quit apps tap
 brew 'ack'
 brew 'coreutils'
 brew 'ctags'
+brew 'diff-so-fancy'
 brew 'go'
 brew 'grc'
 brew 'imagemagick'
@@ -73,6 +74,7 @@ cask 'bee'
 cask 'gifcapture'
 cask 'grammarly'
 cask 'slowquitapps'
+cask 'itsycal'
 
 # Design tools
 cask 'sketch'
