@@ -137,25 +137,14 @@ install_dotfiles () {
   done
 }
 
-install_vim () {
-  info 'installing spacevim'
-
-  local overwrite_all=false backup_all=false skip_all=false
-
-  mkdir -p "$HOME/.config/nvim"
-
-  link_file "$DOTFILES_ROOT/nvim" "$HOME/.config/nvim"
-}
-
 setup_gitconfig
 install_dotfiles
-install_vim
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  if source bin/dot > /tmp/dotfiles-dot 2>&1
+  if source bin/dot > /private/tmp/dotfiles-dot 2>&1
   then
     success "dependencies installed"
   else

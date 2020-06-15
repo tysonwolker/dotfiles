@@ -7,7 +7,6 @@ tap 'dteoh/sqa' # Slow quit apps tap
 brew 'ack'
 brew 'coreutils'
 brew 'ctags'
-brew 'doxygen'
 brew 'go'
 brew 'grc'
 brew 'imagemagick'
@@ -41,8 +40,6 @@ brew 'docker-machine-driver-xhyve'
 
 
 # Java
-cask 'java8'
-brew 'maven'
 
 # Python
 brew 'python@2'
@@ -81,20 +78,17 @@ cask 'slowquitapps'
 cask 'sketch'
 cask 'xscope'
 cask 'zeplin'
-cask 'invisionsync'
 
 # File storage
-cask 'google-drive'
+cask 'google-backup-and-sync'
 
 # Chat applications
-cask 'yakyak'
 cask 'whatsapp'
 cask 'slack'
-cask 'skype'
+cask 'discord'
 
 # Music applications
 cask 'soundcleod'
-cask 'radiant-player'
 cask 'beardedspice'
 
 # Entertainment applications
@@ -103,16 +97,13 @@ cask 'deluge'
 cask 'music-manager'
 cask 'subtitles'
 cask 'plex-media-server'
-cask 'google-plus-auto-backup'
-cask'jadengeller-helium'
+cask 'pennywise'
 
 # Developer Applications
 cask 'paw'
 cask 'charles'
-cask 'webstorm'
 cask 'firefox'
 cask 'iterm2'
-cask 'parallels-desktop'
 cask 'kaleidoscope'
 cask 'dash'
 cask 'tower'
@@ -122,7 +113,7 @@ cask 'go2shell'
 cask 'gitup'
 
 # Mas
-mas 'Xcode', id: 497799835
+#mas 'Xcode', id: 497799835
 mas 'Fantastical 2', id: 975937182
 mas 'Airmail 3', id: 918858936
 mas 'Reeder 3', id: 880001334
